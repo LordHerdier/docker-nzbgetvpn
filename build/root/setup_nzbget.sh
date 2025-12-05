@@ -45,7 +45,7 @@ fi
 aur_packages=""
 
 # call aur install script (arch user repo)
-source aur.sh
+#source aur.sh
 
 # install nzbget
 

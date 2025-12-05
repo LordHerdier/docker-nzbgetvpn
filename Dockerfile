@@ -15,12 +15,16 @@ ADD run/root/*.sh /root/
 # add run bash scripts
 ADD run/nobody/*.sh /home/nobody/
 
+# Move init.sh to the correct location
+RUN mv /root/init.sh /usr/local/bin/init.sh && \
+    chmod +x /usr/local/bin/init.sh
+
 # install app
 #############
 
 # make executable and run bash scripts to install app
 RUN chmod +x /root/*.sh /home/nobody/*.sh && \
-	/bin/bash /root/install.sh
+        /bin/bash /root/setup_nzbget.sh
 
 # Replace default CA certificate store with updated one
 COPY build/cacert.pem /usr/sbin/nzbget_bin/
