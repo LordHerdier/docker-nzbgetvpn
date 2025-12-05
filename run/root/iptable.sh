@@ -67,9 +67,12 @@ if [[ "${DEBUG}" == "true" ]]; then
 	echo "[debug] Modules currently loaded for kernel" ; lsmod
 fi
 
-# check we have iptable_mangle, if so setup fwmark
-lsmod | grep iptable_mangle
-iptable_mangle_exit_code="${?}"
+# Check for iptable_mangle safely
+if lsmod | grep -q iptable_mangle; then
+    iptable_mangle_exit_code=0
+else
+    iptable_mangle_exit_code=1
+fi
 
 if [[ "${iptable_mangle_exit_code}" == 0 ]]; then
 
